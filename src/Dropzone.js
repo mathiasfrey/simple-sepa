@@ -1,47 +1,57 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { useDropzone } from "react-dropzone";
 import "./index.css";
 
-function Dropzone({ open, accept, onDrop }) {
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({
-        accept,
-        onDrop,
-    });
 
-  const files = acceptedFiles.map((file) => (
+function callback (result) {
+    console.log(result);
 
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+    // Create blob link to download
+    const url = window.URL.createObjectURL(
+        new Blob([result]),
+      );
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute(
+        'download',
+        `FileName.csv`,
+      );
+  
+      // Append to html link element page
+      document.body.appendChild(link);
+  
+      // Start download
+      link.click();
+  
+      // Clean up and remove the link
+      link.parentNode.removeChild(link);
 
-  return (
-    <div className="container" id="dropzone">
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-
-        <div className="text-center">
-        {isDragActive ? (
-          <p className="dropzone-content">
-            Release to drop the files here
-          </p>
-        ) : (
-          <p className="dropzone-content">
-            Drag’n’drop some files here, or click to select files
-          </p>
-        )}
-        <button type="button" onClick={open} className="btn">
-          Click to select files
-        </button>
-        </div>
-
-      </div>
-      <aside>
-        <ul>{files}</ul>
-      </aside>
-    </div>
-  );
 }
+
+function Dropzone() {
+    const onDrop = useCallback((acceptedFiles) => {
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader()
+        reader.readAsText(file);
+
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => console.log('file reading has failed')
+        reader.onload = () => {
+            callback(reader.result);
+        };
+        
+
+      })
+      
+    }, [])
+    const {getRootProps, getInputProps} = useDropzone({onDrop})
+  
+    return (
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+    )
+  }
 
 export default Dropzone;
