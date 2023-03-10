@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>dere!</h1>
 
       <Dropzone accept={[".csv, text/csv, application/vnd.ms-excel, application/csv, text/x-csv, application/x-csv, text/comma-separated-values, text/x-comma-separated-values"]}/>
 

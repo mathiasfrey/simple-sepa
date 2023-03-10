@@ -6,6 +6,8 @@ import "./index.css";
 function callback (result) {
     console.log(result);
 
+    // https://www.hettwer-beratung.de/sepa-spezialwissen/sepa-technische-anforderungen/camt-format-camt-054/
+    
     // Create blob link to download
     const url = window.URL.createObjectURL(
         new Blob([result]),
@@ -47,9 +49,19 @@ function Dropzone() {
     const {getRootProps, getInputProps} = useDropzone({onDrop})
   
     return (
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+      <div id="wrapper">
+        <div {...getRootProps()} id="dropzone">
+
+          <div className="icon" />
+
+          <input {...getInputProps()} />
+          <p>Simply drag 'n' drop your csv here, or
+
+            
+
+          </p><button>Browse</button>
+        </div>
+        <a href="https://github.com/mathiasfrey/simple-sepa">Instructions &amp; license</a>
       </div>
     )
   }
