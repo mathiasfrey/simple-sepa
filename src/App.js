@@ -5,9 +5,7 @@ import Dropzone from './Dropzone.js';
 
 function App() {
 
-  const onDrop = useCallback((acceptedFiles) => {
-
-    console.log('w344');
+  useCallback((acceptedFiles) => {
 
     acceptedFiles.map((file) => {
       const reader = new FileReader();
@@ -15,7 +13,7 @@ function App() {
       
 
       reader.onload = function (e) {
-        console.log('dere', e);
+        //console.log('dere', e);
       };
 
       reader.readAsDataURL(file);
