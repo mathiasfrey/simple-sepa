@@ -10,8 +10,6 @@ function App() {
     acceptedFiles.map((file) => {
       const reader = new FileReader();
 
-      
-
       reader.onload = function (e) {
         //console.log('dere', e);
       };

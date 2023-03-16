@@ -1,0 +1,2 @@
+Creditor Company;Creditor Scheme Id;Creditor IBAN;Creditor BIC;Mandate ID;Mandate signed;Debitor Name;Collection date;Sequence;IBAN;Amount EUR;Text
+Testdaten;AT54ZZZ00001000004;AT732011180159794900;GIBAATW0XXX;Regression;2019-02-23;Test;2019-08-21;RCUR;AT982011141510703849;2,33;SDD regression

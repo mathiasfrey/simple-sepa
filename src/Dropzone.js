@@ -1,31 +1,27 @@
 import React, {useCallback} from "react";
 import { useDropzone } from "react-dropzone";
 import "./index.css";
+import { CSV2XML } from "./csv-2-xml.js";
 
 
 function callback (result) {
-    console.log(result);
+    // console.log(result);
 
-    // https://www.hettwer-beratung.de/sepa-spezialwissen/sepa-technische-anforderungen/camt-format-camt-054/
+    const xmlString = CSV2XML(result);
     
     // Create blob link to download
     const url = window.URL.createObjectURL(
-        new Blob([result]),
+        new Blob([xmlString], { type: 'text/xml' }),
       );
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute(
         'download',
-        `FileName.csv`,
+        `FileName.xml`,
       );
   
-      // Append to html link element page
       document.body.appendChild(link);
-  
-      // Start download
       link.click();
-  
-      // Clean up and remove the link
       link.parentNode.removeChild(link);
 
 }
@@ -46,22 +42,21 @@ function Dropzone() {
       })
       
     }, [])
-    const {getRootProps, getInputProps} = useDropzone({onDrop})
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   
     return (
       <div id="wrapper">
-        <div {...getRootProps()} id="dropzone">
+        <div {...getRootProps()} id="dropzone" className={`${isDragActive ? "dragging" : ""}`}>
 
           <div className="icon" />
 
           <input {...getInputProps()} />
           <p>Simply drag 'n' drop your csv here, or
-
             
 
           </p><button>Browse</button>
         </div>
-        <a href="https://github.com/mathiasfrey/simple-sepa">Instructions &amp; license</a>
+        <a href="https://github.com/mathiasfrey/simple-sepa">Instructions, sample CSV &amp; license</a>
       </div>
     )
   }

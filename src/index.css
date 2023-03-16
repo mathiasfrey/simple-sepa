@@ -32,7 +32,11 @@ body {
   width:400px;
   height:300px;
 
+  border-radius: 2em 2em  0.5em 0.5em;
+}
 
+#dropzone.dragging {
+  background-color: #effd5f;
 }
 
 #dropzone .icon {
