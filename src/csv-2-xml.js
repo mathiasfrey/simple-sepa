@@ -117,7 +117,18 @@ function CSV2XML(input) {
     var processedData = [];
 
     function processData(data) {
-      // console.log('Y', data[0]);
+      function escapeXml(unsafe) {
+        return unsafe.replace(/[<>&'"]/g, function (c) {
+            switch (c) {
+                case '<': return '&lt;';
+                case '>': return '&gt;';
+                case '&': return '&amp;';
+                case '\'': return '&apos;';
+                case '"': return '&quot;';
+                default: return '';
+            }
+        });
+      }
 
       // turns "34,01" into 3401 to avoid floating point mayhem
       const _amount = parseFloat(data[10].replace(',','.')) * 100;
@@ -134,14 +145,14 @@ function CSV2XML(input) {
           "DtOfSgntr": data[5],
           
           // debitor
-          "Nm": data[6],
+          "Nm": escapeXml(data[6]),
           "ReqdColltnDt": data[7],
           "SeqTp": data[8],
           "DbtrAcct_IBAN": data[9],
 
           // actual DD data
           "InstdAmt": _amount / 100,
-          "Ustr": data[11],
+          "Ustr": escapeXml(data[11]),
         }
       );
 
