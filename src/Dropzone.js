@@ -2,13 +2,14 @@ import React, {useCallback} from "react";
 import { useDropzone } from "react-dropzone";
 import "./index.css";
 import { CSV2XML } from "./csv-2-xml.js";
-
+import { generate_package_name } from "./helpers.js";
 
 function callback (result) {
     // console.log(result);
 
-    const xmlString = CSV2XML(result);
-    
+    const FileName = generate_package_name();
+    const xmlString = CSV2XML(result, FileName);
+
     // Create blob link to download
     const url = window.URL.createObjectURL(
         new Blob([xmlString], { type: 'text/xml' }),
@@ -17,7 +18,7 @@ function callback (result) {
       link.href = url;
       link.setAttribute(
         'download',
-        `FileName.xml`,
+        `${FileName}.xml`,
       );
   
       document.body.appendChild(link);

@@ -14,17 +14,11 @@ function Header (msgId, txs, sum_in_cents, name, isodt) {
   </GrpHdr>`
 }
 
-function PmtInfArray(arr) {
+function PmtInfArray(arr, FileName) {
   // that's a simple wrapper around PmtInf
 
   // let's create a fun and human-readable Id
-  const PmtInfId = 
-  ['amazing', 'blessed', 'durable', 'engaged', 'hellish'][Math.floor(Math.random()*5)] +
-  ['manatee', 'octopus', 'penguin', 'buffalo', 'axolotl'][Math.floor(Math.random()*5)] +
-  'from' +
-  ['western', 'unfunny', 'tainted', 'riddled', 'likable'][Math.floor(Math.random()*5)] +
-  ['albania', 'belgium', 'jamaica', 'denmark', 'namibia'][Math.floor(Math.random()*5)];
-  console.log('Your payment info Id is', PmtInfId);
+  const PmtInfId = FileName;
 
   var str = '';
   for (let i in arr) {
@@ -108,7 +102,7 @@ function PmtInf(data, PmtInfId) {
   </PmtInf>`
 }
 
-function CSV2XML(input) {
+function CSV2XML(input, FileName) {
 
     // variables that are populated by looping the csv data
     var txs = 0;
@@ -185,7 +179,7 @@ function CSV2XML(input) {
     <Document xmlns="ISO:pain.008.001.02:APC:STUZZA:payments:004" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ISO:pain.008.001.02:APC:STUZZA:payments:004 ISO.pain.008.001.02.austrian.004.xsd">
     <CstmrDrctDbtInitn>
       ${Header(msgId, txs, sum_in_cents, name, isodt)}
-      ${PmtInfArray(processedData)}
+      ${PmtInfArray(processedData, FileName)}
     </CstmrDrctDbtInitn>
   </Document>
   `;
