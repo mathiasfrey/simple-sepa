@@ -1,10 +1,22 @@
 # Usage
 
-[Download sample CSV](./data/direct-debit-example.csv)
+1. Download the sample CSV and put in your data: [Sample CSV](./data/direct-debit-example.csv)
+2. Use the [simple-sepa application](https://simple-sepa.c99.at) to convert
+your csv into an XML file
+3. Upload the XML file to your prefered online banking application
 
 ## Current limitations
 
-The tool only works for direct debits.
+The tool only works for direct debits. There's little to no safety net: Always
+check your direct debit instructions before signing them!
+
+## License
+
+The tool is free - with "free" as in free speech. It comes with 
+absolutely no warranty.
+
+In case you have any questions or feature requests feel free to 
+[contact me](https://c99.at).
 
 # Development
 
