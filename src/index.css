@@ -26,6 +26,8 @@ body {
   /* text-decoration: none; */
   font-family: 'Courier New', Courier, monospace;
   color: #000;
+  position: relative;
+  top: -2em;
 }
 #dropzone {
 
