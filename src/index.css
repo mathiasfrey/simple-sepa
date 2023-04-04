@@ -38,7 +38,13 @@ body {
 }
 
 #dropzone.dragging {
+  animation: mymove 1s 1;
   background-color: #effd5f;
+}
+
+@keyframes mymove {
+  from {background-color: white;}
+  to {background-color:#effd5f;}
 }
 
 #dropzone .icon {
