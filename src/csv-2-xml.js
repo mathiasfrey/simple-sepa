@@ -37,7 +37,7 @@ function PmtInf(data, PmtInfId) {
         <Cd>SEPA</Cd>
       </SvcLvl>
       <LclInstrm>
-        <Cd>B2B</Cd>
+        <Cd>CORE</Cd>
       </LclInstrm>
       <SeqTp>${data.SeqTp}</SeqTp>
     </PmtTpInf>
